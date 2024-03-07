@@ -3,12 +3,15 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 use function Psy\debug;
 
 class AuthControllerTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     public function it_can_not_list_users_except_authenticated_user()
     {
