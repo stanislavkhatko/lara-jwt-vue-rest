@@ -40,4 +40,64 @@ API Development:
 - Tests must cover API endpoints, authentication mechanisms, and front-end interactions.
 
 
+# Installation
+
+Clone repo
+`git clone`
+
+Install dependencies
+`composer install`
+
+Copy .env file
+`cp .env.example .env`
+
+Add laravel keys
+`php artisan key:generate`
+
+Generate JWT secret
+`php artisan jwt:secret`
+
+Run db migrations. Local db will be made under `database/database.sqlite`
+`php artisan migrate`
+
+Run tests
+`sail artisan test`
+
+Run app with Sail (if Docker installed) or with Valet. The app will be run on port 89
+`./vendor/bin/sail up` 
+
+Access app at
+`http://localhost:89/`
+
+Or access with Valet. I'll stick to Valet for now
+`valet link`
+
+Install npm dependencies
+`npm i`
+
+Build sources
+`npm run build` - or `npm run dev` for development
+
+Open with valet
+`valet open` and access at `{folder-name}.test`
+
+Running API tests
+`php artisan test`
+
+
+
+# Development approaches
+There are many ways to implement requested task. The frontend of the app could be separated into a Nuxt.js app and hosted separately. Also even being a monolith solution root or predefined web path of Laravel could have 'Users' SPA with own vue-routing system. I'll take the last approach for the sake of mono repo development.
+
+## Missing parts
+- refresh token functionality
+- extend ttl for jwt token
+- proper error validation in multiple places
+- 
+
+
+
+
+
+
 
