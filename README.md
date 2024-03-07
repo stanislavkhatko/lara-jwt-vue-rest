@@ -60,19 +60,12 @@ Run db migrations. Local db will be made under database/database.sqlite
 `php artisan migrate`
 
 Install npm dependencies
-`npm i`
+`npm install`
 
 Build sources
 `npm run build` - or `npm run dev` for development
 
-
-Run app with Sail (if Docker installed) or with Valet. The app will be run on port 89
-`./vendor/bin/sail up` 
-
-Access app at
-`http://localhost:89/`
-
-Or access with Valet. I'll stick to Valet for now
+Access with Valet. I'll stick to Valet for now instead of Sail.
 `valet link`
 
 Open with valet
@@ -86,13 +79,14 @@ Running Frontend tests
 
 
 # Development approaches
-There are many ways to implement requested task. The frontend of the app could be separated into a Nuxt.js app and hosted separately. Also even being a monolith solution root or predefined web path of Laravel could have 'Users' SPA with own vue-routing system. I'll take the last approach for the sake of mono repo development.
+The frontend of the app better be separated into a Nuxt.js app and hosted separately. 
+Also even by being a monolith solution, a root or predefined web paths of Laravel could have 'Users' SPA with own vue-routing system. I'll take the last approach for the sake of mono repo development.
 
 ## Missing parts
 - refresh token functionality
 - extend ttl for jwt token
-- proper error validation in multiple places
-- Added basic test environment for frontend and simple tests for Login and appStore components. Missing mocks and proper test coverage.
+- ~~proper error validation in multiple places~~
+- Add mocks and proper test coverage for frontend.
 
 
 
