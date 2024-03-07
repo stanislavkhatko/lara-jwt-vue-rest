@@ -56,11 +56,15 @@ Add laravel keys
 Generate JWT secret
 `php artisan jwt:secret`
 
-Run db migrations. Local db will be made under `database/database.sqlite`
+Run db migrations. Local db will be made under database/database.sqlite
 `php artisan migrate`
 
-Run tests
-`sail artisan test`
+Install npm dependencies
+`npm i`
+
+Build sources
+`npm run build` - or `npm run dev` for development
+
 
 Run app with Sail (if Docker installed) or with Valet. The app will be run on port 89
 `./vendor/bin/sail up` 
@@ -70,12 +74,6 @@ Access app at
 
 Or access with Valet. I'll stick to Valet for now
 `valet link`
-
-Install npm dependencies
-`npm i`
-
-Build sources
-`npm run build` - or `npm run dev` for development
 
 Open with valet
 `valet open` or access linked folder in  `{folder-name}.test`
