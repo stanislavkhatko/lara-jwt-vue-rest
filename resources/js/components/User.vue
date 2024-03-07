@@ -8,6 +8,7 @@ export default {
     data() {
         return {
             errorMessage: '',
+            errorMessages: [],
         }
     },
     computed: {
@@ -22,26 +23,26 @@ export default {
         },
     },
     beforeMount() {
-        if (this.$route.params.id !== 'new') {
+        if (this.$route.name !== 'new-user') {
             usersStore().actionGetUser(this.$route.params.id)
         }
     },
     methods: {
         appStore,
         submit() {
-            // TODO add proper error handling
-
             this.errorMessage = '';
+            this.errorMessages = [];
 
             if (this.editedUser.id) {
                 usersStore().actionUpdateUser().catch(err => {
-                    console.log(err);
                     this.errorMessage = err.response.data.error
+                    if(err.response.status === 422) this.errorMessages = Object.values(err.response.data)
                 })
             } else {
                 usersStore().actionStoreUser().catch(err => {
-                    console.log(err);
                     this.errorMessage = err.response.data.error
+                    if(err.response.status === 422) this.errorMessages = Object.values(err.response.data)
+
                 })
             }
         }
@@ -72,6 +73,7 @@ export default {
                     type="text"
                     placeholder="email"
                     required
+                    :disabled="!!user.id"
                 ></v-text-field>
 
                 <v-text-field
@@ -85,6 +87,11 @@ export default {
                 ></v-text-field>
 
                 <div class="red--text"> {{ errorMessage }}</div>
+                <v-list>
+                    <v-list-item v-for="(error, key) in errorMessages" :key="key">
+                        <v-list-item-title class="text-wrap">{{ error[0] }}</v-list-item-title>
+                    </v-list-item>
+                </v-list>
 
                 <v-btn
                     :loading="appStore().preloader"

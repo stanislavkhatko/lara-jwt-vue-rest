@@ -14,11 +14,10 @@ export const authStore = defineStore({
 
             if (access_token) {
                 const token = 'Bearer ' + access_token
-                localStorage.setItem('token', token)
-
-                _axios.defaults.headers.common['Authorization'] = token
-
                 authStore().token = token
+
+                localStorage.setItem('token', token)
+                _axios.defaults.headers.common.Authorization = token
             }
 
             authStore().user = user;
@@ -35,15 +34,13 @@ export const authStore = defineStore({
         },
         actionLogout() {
             return new Promise((res) => {
-                this.actionUnsetAuth()
+                localStorage.removeItem('token')
+
+                authStore().token = '';
+                authStore().user = {}
+
                 res()
             })
-        },
-        actionUnsetAuth() {
-            localStorage.removeItem('token')
-            delete _axios.defaults.headers.common['Authorization']
-            authStore().token = '';
-            authStore().user = {}
         },
 
         actionGetUser() {

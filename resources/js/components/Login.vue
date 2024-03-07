@@ -46,6 +46,13 @@
                                                   placeholder="confirm password"
                                                   required
                                     ></v-text-field>
+
+                                    <v-list>
+                                        <v-list-item v-for="(error, key) in errorMessages" :key="key">
+                                            <v-list-item-title>{{ error[0] }}</v-list-item-title>
+                                        </v-list-item>
+                                    </v-list>
+
                                     <div class="red--text"> {{ errorMessage }}</div>
                                     <v-btn type="submit" class="mt-4" color="primary" value="log in">
                                         {{ isRegister ? stateObj.register.name : stateObj.login.name }}
@@ -65,19 +72,20 @@
 </template>
 
 <script>
-import {authStore} from "../store/auth.js";
+import {authStore} from '../store/auth.js';
 import {mapActions} from "pinia";
 
 export default {
     name: "App",
     data() {
         return {
-            name: "Stan",
-            email: "s.a.hatko@gmail.com",
-            password: "123456",
-            confirmPassword: "123456",
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
             isRegister: false,
             errorMessage: "",
+            errorMessages: [],
             stateObj: {
                 register: {
                     name: 'Register',
@@ -97,12 +105,13 @@ export default {
             this.actionLogin({email: this.email, password: this.password}).then(() => {
                 this.$router.push('/')
             }).catch(err => {
-                console.log('err', err)
-                if (err.response.data.error) {
-                    this.errorMessage = err.response.data.error;
-                } else {
-                    alert(err)
+                if (err.response.data) {
+
+                    if(err.response.data.error) this.errorMessage = 'Wrong email or password'
+
+                    if(err.response.statusCode === 422) this.errorMessages = Object.values(err.response.data);
                 }
+
                 // TODO display error properly
             })
             // this.$router.replace({name: "dashboard", params: {username: username}});
@@ -110,6 +119,7 @@ export default {
         register() {
             if (this.password === this.confirmPassword) {
                 this.errorMessage = "";
+                this.errorMessages = [];
 
                 let data = {
                     name: this.name,
@@ -120,9 +130,7 @@ export default {
 
                 this.actionRegister(data).then(() => this.$router.push('/')).catch(err => {
                     if (err.response.data.error) {
-                        this.errorMessage = err.response.data.error;
-                    } else {
-                        alert(err)
+                        this.errorMessages = Object.values(JSON.parse(err.response.data.error));
                     }
                     // TODO display error properly
                 })

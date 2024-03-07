@@ -1,4 +1,3 @@
-# Instructions for the Test Project
 
 ## User Management System
 
@@ -40,7 +39,7 @@ API Development:
 - Tests must cover API endpoints, authentication mechanisms, and front-end interactions.
 
 
-# Installation
+## Installation
 
 Clone repo
 `git clone`
@@ -79,11 +78,13 @@ Build sources
 `npm run build` - or `npm run dev` for development
 
 Open with valet
-`valet open` and access at `{folder-name}.test`
+`valet open` or access linked folder in  `{folder-name}.test`
 
 Running API tests
 `php artisan test`
 
+Running Frontend tests
+`npm run test`
 
 
 # Development approaches
@@ -93,7 +94,7 @@ There are many ways to implement requested task. The frontend of the app could b
 - refresh token functionality
 - extend ttl for jwt token
 - proper error validation in multiple places
-- 
+- Added basic test environment for frontend and simple tests for Login and appStore components. Missing mocks and proper test coverage.
 
 
 

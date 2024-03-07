@@ -1,9 +1,9 @@
 import * as VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import Dashboard from '../components/Dashboard.vue'
-import {authStore} from "../store/auth.js";
-import User from "../components/User.vue";
-import Users from "../components/Users.vue";
+import User from '../components/User.vue';
+import Users from '../components/Users.vue';
+import {authStore} from '../store/auth.js';
 
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(),

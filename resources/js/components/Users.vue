@@ -41,7 +41,7 @@ export default {
 
     <v-container fluid>
         <v-container>
-            <v-btn @click="$router.push('/users/new')" prepend-icon="mdi-cross">Add user</v-btn>
+            <v-btn @click="$router.push('/users/new')" prepend-icon="mdi-plus">Add user</v-btn>
             <v-data-table
                 :headers="headers"
                 :items="users"

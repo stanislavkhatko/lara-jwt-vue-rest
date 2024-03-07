@@ -37,7 +37,7 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->toJson()], 400);
+            return response()->json($validator->errors(), 422);
         }
 
         $user = User::create(array_merge(
@@ -73,7 +73,7 @@ class UserController extends Controller
             'name' => 'required|string|between:2,100',
         ]);
 
-        if ($validator->fails()) return response()->json(['error' => $validator->errors()->toJson()], 400);
+        if ($validator->fails()) return response()->json($validator->errors(), 422);
 
         $user->update(['name' => $request->name]);
         return response()->json($user);

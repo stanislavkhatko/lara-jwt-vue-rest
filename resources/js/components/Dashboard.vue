@@ -40,7 +40,7 @@
 
 <script>
 import {mapActions, mapState} from "pinia";
-import {authStore} from "../store/auth.js";
+import {authStore} from '../store/auth.js';
 import Users from "./Users.vue";
 
 export default {
