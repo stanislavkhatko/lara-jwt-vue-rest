@@ -1,0 +1,27 @@
+runtime: php
+env: flex
+
+runtime_config:
+document_root: public
+
+# Ensure we skip ".env", which is only for local development
+skip_files:
+  - .env
+
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 1
+
+resources:
+  cpu: 1
+  memory_gb: 2
+  disk_size_gb: 20
+
+env_variables:
+  # Put production environment variables here.
+  APP_DEBUG: true
+  APP_ENV: production
+  APP_KEY: base64:ib+bWCn/fql4y3PUQiv/nclbdFcRt8lh8Zk3WiXR2tY=
+  APP_NAME: "Lara-jwt-vue-rest"
+
+  LOG_LEVEL: debug
