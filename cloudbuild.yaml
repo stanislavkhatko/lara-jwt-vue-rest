@@ -1,0 +1,7 @@
+steps:
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['app', 'deploy', 'app.yaml']
+
+# Timeout setting for the entire build process.
+timeout: 1600s  # 1600 seconds (around 27 minutes)
