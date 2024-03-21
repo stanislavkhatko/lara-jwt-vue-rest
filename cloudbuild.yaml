@@ -1,7 +1,10 @@
 steps:
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        gcloud config set app/cloud_build_timeout 3600 && \
+        gcloud app deploy -q --promote -v=$BUILD_ID --project=$PROJECT_ID
 
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app', 'deploy', 'app.yaml']
-
-# Timeout setting for the entire build process.
-timeout: 1600s  # 1600 seconds (around 27 minutes)
+timeout: 3600s
